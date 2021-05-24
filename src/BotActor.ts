@@ -52,6 +52,13 @@ export class BotActor {
 		this.config.replaceOne({ sid: server }, config, { upsert: true })
 	}
 
+	send(message: Message, content: string) {
+		const channel: Channel = message.channel
+		if (!(channel instanceof TextChannel)) return;
+		// channel.send(content)
+		channel.send(ExtAPIMessage.create(message, content, {}, {}))
+	}
+
 	reply(message: Message, content: string) {
 		const channel: Channel = message.channel
 		if (!(channel instanceof TextChannel)) return;

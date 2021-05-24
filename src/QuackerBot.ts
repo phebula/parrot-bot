@@ -56,7 +56,10 @@ async function onCommand(
 
 		if (content === undefined) content = DEFAULT_CONFIG.prefix
 		actor.setServerConfig(config.sid, { ...config, prefix: content })
-		actor.reply(message, "Set the prefix to '" + content + "'")
+		actor.send(message, "Set the prefix to '" + content + "'")
+	}
+	else if (command === 'ping') {
+		actor.send(message, "Pong! <@!" + message.author.id + ">")
 	}
 	else if (command === 'addquote') {
 		if (content === undefined) {
@@ -80,13 +83,16 @@ async function onCommand(
 		try {
 			const quote = await getQuote(actor, content)
 			const lines = (quote.content.match(/\n/g) || '').length + 1
+			// const member = await message.guild.members.fetch(quote.author)
 
 			if (lines <= 1) {
-				actor.reply(message, `Quote **#${quote.id}**\n*"${quote.content}"* - <@!${quote.author}>`)
+				actor.send(message, `Quote **#${quote.id}**\n*"${quote.content}"* - <@!${quote.author}>`)
 			}
 			else {
-				actor.reply(message, `Quote **#${quote.id}** <@!${quote.author}>:\n> ${quote.content.split('\n').join('\n> ')}`)
+				actor.send(message, `Quote **#${quote.id}** <@!${quote.author}>:\n> ${quote.content.split('\n').join('\n> ')}`)
 			}
+			
+			message.delete()
 		}
 		catch (e) {
 			console.log(e)
@@ -95,10 +101,10 @@ async function onCommand(
 	}
 	else if (command === 'help') {
 		if (content === undefined) {
-			actor.reply(message, HELP_TEXT.split("$PREFIX").join(config.prefix))
+			actor.send(message, HELP_TEXT.split("$PREFIX").join(config.prefix))
 		}
 		else if (content === "quotes") {
-			actor.reply(message, QUOTE_HELP_TEXT.split("$PREFIX").join(config.prefix))
+			actor.send(message, QUOTE_HELP_TEXT.split("$PREFIX").join(config.prefix))
 		}
 		else {
 			actor.reply(message, "I don't know how to help with '" + content + "'")
@@ -154,7 +160,7 @@ async function addQuote(
 	}
 
 	actor.quotes.insertOne(quote)
-	actor.reply(cmessage, `**Quote #${quote.id} added!**\n*"${quote.content}"* - <@!${quote.author}>`)
+	actor.send(cmessage, `**Quote #${quote.id} added!**\n*"${quote.content}"* - <@!${quote.author}>`)
 }
 
 async function removeQuote(actor: BotActor, message: Message, content?: string) {
@@ -169,7 +175,7 @@ async function removeQuote(actor: BotActor, message: Message, content?: string) 
 
 			if (quote.quoter === message.author.id) {
 				actor.quotes.deleteOne({ id: id })
-				actor.reply(message, "**Quote #" + id + " deleted!**")
+				actor.send(message, "**Quote #" + id + " deleted!**")
 			}
 			else {
 				actor.reply(message, `You can't delete a quote that <@!${quote.quoter}> submitted`)
