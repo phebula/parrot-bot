@@ -53,7 +53,7 @@ async function onCommand(
 			actor.reply(message, "You need to be an admin to do that")
 			return
 		}
-		
+
 		if (content === undefined) content = DEFAULT_CONFIG.prefix
 		actor.setServerConfig(config.sid, { ...config, prefix: content })
 		actor.reply(message, "Set the prefix to '" + content + "'")
@@ -89,6 +89,7 @@ async function onCommand(
 			}
 		}
 		catch (e) {
+			console.log(e)
 			actor.reply(message, "No such quote!")
 		}
 	}
