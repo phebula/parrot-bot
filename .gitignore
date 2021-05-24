@@ -1,0 +1,12 @@
+# Database
+.data
+
+# Environment variables
+.env
+
+# TS output
+out/
+
+# NPM stuff
+package-lock.json
+node_modules/
