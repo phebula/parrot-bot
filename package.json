@@ -7,6 +7,7 @@
     "db": "mongod --dbpath=$(pwd)/.data",
     "start": "node out/index.js",
     "watch": "tsc -p tsconfig.json -w",
+    "build": "tsc -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

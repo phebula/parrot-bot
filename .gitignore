@@ -8,5 +8,4 @@
 out/
 
 # NPM stuff
-package-lock.json
 node_modules/

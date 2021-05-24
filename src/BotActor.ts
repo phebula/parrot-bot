@@ -44,6 +44,7 @@ export class BotActor {
 
 	async getServerConfig(server: Guild): Promise<ServerConfig> {
 		return await this.config.findOne({ sid: server.id })
+		    || { sid: server.id, ...DEFAULT_CONFIG }
 	}
 
 	setServerConfig(server: Guild | Snowflake, config: ServerConfig) {
