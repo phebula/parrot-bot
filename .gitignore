@@ -1,11 +1,5 @@
-# Database
-.data
-
 # Environment variables
 .env
 
-# TS output
-out/
-
-# NPM stuff
-node_modules/
+# Dependencies
+node_modules

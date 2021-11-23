@@ -18,9 +18,14 @@ export async function execute(interaction: CommandInteraction<CacheType>, state:
 
 	const quote = await state.database.getQuoteById(id)
 
+	if (quote === null) {
+		interaction.editReply("There's no such quote with the ID #" + id)
+		return state
+	}
+
 	if (quote.quoter != interaction.user.id) {
 		interaction.editReply("You can't remove this quote because you didn't upload it.")
-		return
+		return state
 	}
 
 	await state.database.removeQuoteById(id)

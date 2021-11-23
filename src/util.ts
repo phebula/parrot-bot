@@ -27,5 +27,8 @@ export function printQuote(interaction: CommandInteraction<CacheType>, quote: Qu
 	var replyText = `Quote **#${quote.id}**...\n> `
 	              + formatQuotes(quote.multiQuoteParts, u => u).split('\n').join('\n> ')
 
+	// TODO: reactions (+1/-1)
+	// TODO: seen counter
+
 	interaction.editReply(replyText)
 }

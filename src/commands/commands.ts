@@ -4,7 +4,7 @@ import { CacheType, CommandInteraction } from "discord.js"
 import { State } from "../State"
 
 export async function loadCommands() {
-	const allCommands = readdirSync('./out/commands')
+	const allCommands = readdirSync('./js/commands')
 		.filter(file => file.endsWith('.js'))
 		.filter(file => !file.startsWith("commands"))
 		.map(file => import(`./${file}`))

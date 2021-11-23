@@ -1,0 +1,36 @@
+version: "2"
+
+networks:
+  quackerbot_network:
+
+volumes:
+  database_data:
+
+services:
+  bot:
+    container_name: bot
+    image: exerro/quackerbot:latest
+    networks:
+      - quackerbot_network
+    environment:
+      DB_HOST: database
+      DB_PORT: 27017
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      DISCORD_APP_ID: ${DISCORD_APP_ID}
+      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
+      DISCORD_GUILD_ID: ${DISCORD_GUILD_ID}
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      DEBUG: ${DEBUG}
+
+  mongodb:
+    container_name: database
+    image: mongo
+    networks:
+      - quackerbot_network
+    volumes:
+      - database_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
