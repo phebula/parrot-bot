@@ -15,7 +15,7 @@ async function deploy() {
 
 	let route: `/${string}`
 
-	if (process.env["DEBUG"]) {
+	if (process.env["DEBUG"] == "true") {
 		console.log("Deploying in debug mode")
 		route = Routes.applicationGuildCommands(process.env.DISCORD_CLIENT_ID || "", process.env.DISCORD_GUILD_ID || "")
 	}
