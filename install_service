@@ -1,11 +1,11 @@
-#!/usr/bin/env fish
+#!/usr/bin/env -S sudo fish
 
 cat parrot-bot.service.template | \
-	sed s/%PATH%/(pwd)/ > \
+	sed "s@%PATH%@"(pwd)"@" > \
 	/etc/systemd/system/parrot-bot.service
 
 echo "Installed service, use"
-echo "  sudo systemctl start parrot-bot"
+echo "  sudo systemctl daemon-reload && sudo systemctl start parrot-bot"
 echo "to run, and"
-echo "  sudo systemctl start parrot-bot"
+echo "  sudo systemctl enable parrot-bot"
 echo "to run on startup"
