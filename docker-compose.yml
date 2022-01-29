@@ -4,7 +4,7 @@ volumes:
   database_data:
 
 services:
-  bot:
+  discord-bot:
     build: .
     environment:
       DB_HOST: mongodb
@@ -16,7 +16,9 @@ services:
       DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
       DISCORD_GUILD_ID: ${DISCORD_GUILD_ID}
       DISCORD_TOKEN: ${DISCORD_TOKEN}
-      DEBUG: true
+      DEBUG: "true"
+    depends_on:
+      - mongodb
 
   mongodb:
     image: mongo

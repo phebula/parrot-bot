@@ -25,5 +25,5 @@ export async function printQuote(interaction: CommandInteraction<CacheType>, quo
 	// TODO: reactions (+1/-1)
 	// TODO: seen counter
 
-	await interaction.followUp(replyText)
+	await interaction.editReply(replyText)
 }

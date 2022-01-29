@@ -5,4 +5,4 @@
 node_modules
 
 # Backups that I make
-.data-backup.json
+.data-backup*.json

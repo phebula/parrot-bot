@@ -8,10 +8,7 @@ export const command = new SlashCommandBuilder()
 	.setDescription("Print a random quote.")
 
 export async function execute(interaction: CommandInteraction<CacheType>, state: State): Promise<State> {
-	await interaction.reply({
-		content: "Getting a random quote...",
-		ephemeral: true,
-	})
+	await interaction.deferReply()
 
 	const quote = await state.database.getRandomQuote()
 

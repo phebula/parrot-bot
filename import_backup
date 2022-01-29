@@ -1,0 +1,24 @@
+#!/usr/bin/env fish
+
+for line in (cat .env)
+	set -l arr (printf $line | tr = \n)
+	set -g $arr[1] $arr[2]
+end
+
+set -l file $argv[1]
+
+if test -z "$file"
+	set file .data-backup.json
+end
+
+echo "Importing from $file"
+
+sudo docker run -it --rm --network parrot-bot_default -v (realpath $file):/usr/app/.data-backup.json mongo \
+	mongoimport \
+	--host mongodb \
+	--username $DB_USER \
+	--password $DB_PASS \
+	--authenticationDatabase admin \
+	-d $DB_NAME \
+	-c quotes \
+	/usr/app/.data-backup.json

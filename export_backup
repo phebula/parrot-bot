@@ -1,0 +1,28 @@
+#!/usr/bin/env fish
+
+for line in (cat .env)
+	set -l arr (printf $line | tr = \n)
+	set -g $arr[1] $arr[2]
+end
+
+set -l file .data-backup-(date +%Y_%m_%d-%H_%M).json
+
+echo "Exporting backup to $file"
+
+sudo docker run -it --rm --network parrot-bot_default mongo \
+	mongoexport \
+	--host mongodb \
+	--username $DB_USER \
+	--password $DB_PASS \
+	--authenticationDatabase admin \
+	-d $DB_NAME \
+	-c quotes \
+	--pretty \
+	> $file
+
+if test -f .data-backup.json
+	rm .data-backup.json
+end
+
+echo "ln -s $file .data-backup.json"
+ln -s $file .data-backup.json

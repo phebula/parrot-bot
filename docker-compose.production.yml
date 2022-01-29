@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  bot:
+  discord-bot:
     build: .
     environment:
       DB_HOST: mongodb
@@ -13,7 +13,9 @@ services:
       DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
       DISCORD_GUILD_ID: ${DISCORD_GUILD_ID}
       DISCORD_TOKEN: ${DISCORD_TOKEN}
-      DEBUG: false
+      DEBUG: "false"
+    depends_on:
+      - mongodb
 
   mongodb:
     image: mongo
