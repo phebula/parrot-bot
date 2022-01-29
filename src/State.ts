@@ -1,5 +1,5 @@
 import { User } from "discord.js";
-import { DatabaseInterface } from "./database";
+import { DatabaseInterface } from "./DatabaseInterface";
 
 export type State = {
     database: DatabaseInterface,

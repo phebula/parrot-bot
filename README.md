@@ -1,10 +1,6 @@
-# quacker-bot
+# parrot-bot
 
-Discord bot for Quackers and friends
-
-See `bin/update`
-
-Also need mongodb: `sudo apt-get install mongodb`
+Discord bot for quotes 'n' stuff
 
 To start on server:
 

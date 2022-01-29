@@ -1,10 +1,10 @@
 FROM node:17-alpine AS build
 WORKDIR /usr/app
-COPY ./tsconfig.json ./
+RUN yarn global add typescript
 COPY ./package.json ./
 COPY ./yarn.lock ./
 RUN yarn install
-RUN yarn global add typescript
+COPY ./tsconfig.json ./
 COPY ./src/ ./
 RUN tsc -p tsconfig.json
 

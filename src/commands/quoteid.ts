@@ -14,11 +14,19 @@ export const command = new SlashCommandBuilder()
 export async function execute(interaction: CommandInteraction<CacheType>, state: State): Promise<State> {
 	const id = interaction.options.getNumber("id", true)
 
-	await interaction.deferReply()
+	await interaction.reply({
+		content: "Getting quote **#" + id + "**...",
+		ephemeral: true,
+	})
 
 	const quote = await state.database.getQuoteById(id)
 
-	printQuote(interaction, quote)
+	console.log(quote)
+
+	if (quote === null)
+		await interaction.editReply("Quote **#" + id + "** doesn't exist!")
+	else
+		await printQuote(interaction, quote)
 
 	return state
 }

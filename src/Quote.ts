@@ -1,11 +1,11 @@
 
-export type Quote = QuoteV1_1
+export type Quote = QuoteV12
 
-export type QuoteV1_1 = {
-	quoteVersion: '1.1',
+export type QuoteV12 = {
+	quote_format: 'v1.2',
 	id: number,
 	quoter: string,
-	multiQuoteParts: {
+	quote_parts: {
 		user: string,
 		content: string,
 	}[]

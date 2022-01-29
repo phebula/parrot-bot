@@ -7,6 +7,9 @@ export const command = new SlashCommandBuilder()
 	.setDescription("Replies with a pong.")
 
 export async function execute(interaction: CommandInteraction<CacheType>, state: State): Promise<State> {
-	await interaction.reply("Pong from QuackerBot!")
+	await interaction.reply({
+		content: "Pong from ParrotBot!",
+		ephemeral: true,
+	})
 	return state
 }

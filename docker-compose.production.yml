@@ -1,8 +1,5 @@
 version: "3"
 
-volumes:
-  database_data:
-
 services:
   bot:
     build: .
@@ -16,12 +13,12 @@ services:
       DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
       DISCORD_GUILD_ID: ${DISCORD_GUILD_ID}
       DISCORD_TOKEN: ${DISCORD_TOKEN}
-      DEBUG: true
+      DEBUG: false
 
   mongodb:
     image: mongo
     volumes:
-      - database_data:/data/db
+      - /var/lib/parrot-bot:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}

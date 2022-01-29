@@ -14,11 +14,17 @@ export const command = new SlashCommandBuilder()
 export async function execute(interaction: CommandInteraction<CacheType>, state: State): Promise<State> {
 	const user = interaction.options.getUser("user", true)
 
-	await interaction.deferReply()
+	await interaction.reply({
+		content: "Getting a quote from <@" + user + ">...",
+		ephemeral: true,
+	})
 
 	const quote = await state.database.getQuoteByUser(user)
 
-	printQuote(interaction, quote)
+	if (quote === null)
+		await interaction.editReply("No quotes from <@" + user + ">!")
+	else
+		await printQuote(interaction, quote)
 
 	return state
 }

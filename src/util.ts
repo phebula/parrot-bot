@@ -2,13 +2,13 @@ import { CacheType, CommandInteraction } from "discord.js"
 import { Quote } from "./Quote"
 
 export function formatQuotes<U>(
-	multiQuoteParts: { user: U, content: string }[],
+	quote_parts: { user: U, content: string }[],
 	formatUser: (user: U) => string
 ) {
 	let result = ""
 	let first = true
 
-	for (const { user, content } of multiQuoteParts) {
+	for (const { user, content } of quote_parts) {
 		if (first) first = false
 		else result += "\n"
 
@@ -18,17 +18,12 @@ export function formatQuotes<U>(
 	return result
 }
 
-export function printQuote(interaction: CommandInteraction<CacheType>, quote: Quote | null) {
-	if (quote === null) {
-		interaction.editReply("No such quote!")
-		return
-	}
-
+export async function printQuote(interaction: CommandInteraction<CacheType>, quote: Quote) {
 	var replyText = `Quote **#${quote.id}**...\n> `
-	              + formatQuotes(quote.multiQuoteParts, u => u).split('\n').join('\n> ')
+	              + formatQuotes(quote.quote_parts, u => u).split('\n').join('\n> ')
 
 	// TODO: reactions (+1/-1)
 	// TODO: seen counter
 
-	interaction.editReply(replyText)
+	await interaction.followUp(replyText)
 }

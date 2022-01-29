@@ -5,7 +5,7 @@ import { formatQuotes } from '../util'
 
 export const command = new SlashCommandBuilder()
 	.setName("addquote")
-	.setDescription("Add a quote from a user.")
+	.setDescription("Add a quote from a user. Check out /multiquote if you want to add a conversation-like quote.")
 	.addUserOption(option => option
 		.setName("user")
 		.setDescription("The person that said what is being quoted.")

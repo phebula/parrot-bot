@@ -12,7 +12,10 @@ export async function execute(interaction: CommandInteraction<CacheType>, state:
 	const newMultiQuotes = new Map<string, CurrentMultiQuote>()
 
 	if (multiQuote === undefined) {
-		await interaction.reply({ content: "Please add quotes using /multiquote.", ephemeral: true })
+		await interaction.reply({
+			content: "Please add quotes using /multiquote.",
+			ephemeral: true,
+		})
 		return state
 	}
 

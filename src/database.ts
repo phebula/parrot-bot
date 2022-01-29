@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb"
-import { User } from "discord.js"
+import { DatabaseInterface } from "./DatabaseInterface"
 import { Quote } from "./Quote"
 
 const host = process.env.DB_HOST
@@ -31,13 +31,13 @@ export async function connect(onConnected: (database: DatabaseInterface) => Prom
 	const quotes = db.collection<Quote>('quotes')
 
 	onConnected({
-		addQuote: async (quoter, multiQuoteParts) => {
+		addQuote: async (quoter, quote_parts) => {
 			const qc = quotes.find().sort({id:-1}).limit(1)
 			const quote: Quote = {
-				quoteVersion: '1.1',
+				quote_format: 'v1.2',
 				id: (await qc.hasNext() ? (await qc.next() as Quote).id : 0) + 1,
 				quoter: quoter.id,
-				multiQuoteParts: multiQuoteParts.map(({ user, content }) => { return { user: user.id, content: content } })
+				quote_parts: quote_parts.map(({ user, content }) => { return { user: user.id, content: content } })
 			}
 
 			await quotes.insertOne(quote)
@@ -53,7 +53,7 @@ export async function connect(onConnected: (database: DatabaseInterface) => Prom
 		getQuoteByUser: async (user) => {
 			return quotes.aggregate([
 				{ "$match": { 
-					"multiQuoteParts": { "$elemMatch": {
+					"quote_parts": { "$elemMatch": {
 						"user": user.id
 					} }
 				} },
@@ -64,12 +64,4 @@ export async function connect(onConnected: (database: DatabaseInterface) => Prom
 			await quotes.deleteOne({ id: id })
 		}
 	})
-}
-
-export type DatabaseInterface = {
-	addQuote: (quoter: User, multiQuoteParts: { user: User, content: string }[]) => Promise<number>,
-	getRandomQuote: () => Promise<Quote | null>,
-	getQuoteById: (id: number) => Promise<Quote | null>,
-	getQuoteByUser: (user: User) => Promise<Quote | null>,
-	removeQuoteById: (id: number) => Promise<void>
 }

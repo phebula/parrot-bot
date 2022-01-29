@@ -7,7 +7,7 @@ import Collection from "@discordjs/collection"
 import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v9'
 
-console.log('Starting QuackerBot')
+console.log('Starting ParrotBot')
 
 async function deploy() {
 	const slashCommands = (await loadCommands()).map(c => c.command.toJSON())
@@ -42,7 +42,7 @@ db_connect(async (db) => {
 	}
 
 	client.once('ready', () => {
-		console.log('QuackerBot is ready!')
+		console.log('ParrotBot is ready!')
 	})
 
 	client.on('interactionCreate', async interaction => {

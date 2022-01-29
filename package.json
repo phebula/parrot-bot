@@ -1,24 +1,24 @@
 {
-	"name": "quacker-bot",
-	"version": "1.1.0",
-	"description": "Discord bot for the Quackers server and friends",
+	"name": "parrot-bot",
+	"version": "1.2.0",
+	"description": "Discord bot for quotes 'n' stuff.",
 	"main": "out/index.js",
 	"author": "exerro",
 	"license": "MIT",
 	"keywords": [
 	  "discord",
 	  "bot",
-	  "quackers"
+	  "quotes"
 	],
 	"repository": {
 	  "type": "git",
-	  "url": "git+https://github.com/exerro/quacker-bot.git"
+	  "url": "git+https://github.com/exerro/parrot-bot.git"
 	},
 	"bugs": {
-	  "url": "https://github.com/exerro/quacker-bot/issues"
+	  "url": "https://github.com/exerro/parrot-bot/issues"
 	},
 	"packageManager": "yarn@3.0.2",
-	"homepage": "https://github.com/exerro/quacker-bot#readme",
+	"homepage": "https://github.com/exerro/parrot-bot#readme",
 	"dependencies": {
 	  "@discordjs/builders": "^0.8.2",
 	  "@discordjs/rest": "^0.1.1-canary.0",
