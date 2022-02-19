@@ -18,8 +18,6 @@ export async function execute(interaction: CommandInteraction<CacheType>, state:
 
 	const quote = await state.database.getQuoteById(id)
 
-	console.log(quote)
-
 	if (quote === null)
 		await interaction.editReply("Quote **#" + id + "** doesn't exist!")
 	else
