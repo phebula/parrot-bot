@@ -6,7 +6,7 @@
 		"esModuleInterop": true,
 		"lib": ["es6", "dom"],
 		"sourceMap": true,
-		"types": ["node", "discord.js"],
+		"types": ["node"],
 		"typeRoots": [
 			"node_modules/@types"
 		],
